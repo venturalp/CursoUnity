@@ -6,6 +6,7 @@ public class aula : MonoBehaviour {
 	//Declarando variáveis
 	public	bool walk;
 	public Animator anima;
+	public float movimentacaoX;
 
 	// Use this for initialization
 	void Start () {
@@ -15,12 +16,10 @@ public class aula : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetAxis ("Horizontal") != 0) {
-			//if (Input.GetAxis ("Horizontal") == -1) 
+		if (Input.GetAxis ("Horizontal") != 0)
 			walk = true;
-		} else {
+		else
 			walk = false;
-		}
 
 		anima.SetBool("walk", walk);
 	}

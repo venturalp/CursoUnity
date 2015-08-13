@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class aula : MonoBehaviour {
+public class Jogador : MonoBehaviour {
 
 	//Declarando variáveis
 	public	bool 		walk;
@@ -11,6 +11,11 @@ public class aula : MonoBehaviour {
 	public  int			jumpForce;
 	private float 		movimentacaoX;
 	private bool		facingRight = true;
+	public 	Transform	groundChecker;
+	public 	bool		grounded;
+	public 	LayerMask	WhatIsGround;
+	public  int			jumped = 0;
+	public 	bool		doubleJump;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +27,18 @@ public class aula : MonoBehaviour {
 
 		movimentacaoX = Input.GetAxis ("Horizontal");
 
-		if (Input.GetButtonDown ("Jump")) {
+		grounded = Physics2D.OverlapCircle (groundChecker.position, 0.2f, WhatIsGround);	
+
+		if (grounded)
+			doubleJump = false;	
+
+		if (Input.GetButtonDown ("Jump") && (grounded || !doubleJump)) {
+
+			rbPlayer.velocity = new Vector2(0,0);
+
 			rbPlayer.AddForce(new Vector2(0, jumpForce));
+			if (!grounded || !doubleJump)
+				doubleJump = true;
 		}
 
 		if (movimentacaoX > 0 && !facingRight)
@@ -35,6 +50,9 @@ public class aula : MonoBehaviour {
 
 		walk = movimentacaoX != 0;
 		anima.SetBool("walk", walk);
+
+		if (grounded)
+			jumped = 0;
 	}
 
 	void Flip() {

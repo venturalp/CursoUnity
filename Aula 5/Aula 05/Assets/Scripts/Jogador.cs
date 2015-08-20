@@ -25,6 +25,9 @@ public class Jogador : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+		//maxspeedy = 
+		//minspeedy = -3.4
 		movimentacaoX = Input.GetAxis ("Horizontal");
 
 		grounded = Physics2D.OverlapCircle (groundChecker.position, 0.2f, WhatIsGround);	
@@ -50,6 +53,9 @@ public class Jogador : MonoBehaviour {
 
 		walk = movimentacaoX != 0;
 		anima.SetBool("walk", walk);
+		anima.SetBool ("grounded", grounded);
+		anima.SetFloat ("speedY", rbPlayer.velocity.y);
+
 
 		if (grounded)
 			jumped = 0;

@@ -69,4 +69,29 @@ public class Jogador : MonoBehaviour {
 		transform.localScale = playerScale;
 
 	}
+
+	void OnTriggerEnter2D()	{
+		Debug.Log ("bateu");
+	}
+
+	void OnTriggerExit2D(){
+		Debug.Log ("SAIU");
+	}
+
+	void OnTriggerStay2D(){
+		Debug.Log ("EM COLISÃO");
+	}
+
+	void OnColisionEnter2D(){
+		Debug.Log ("Colision Enter 2d");
+	}
+
+	void OnColisionExit2D(){
+		Debug.Log ("Colision Exit 2d");
+	}
+
+	void OnColisionStay2D(){
+		Debug.Log ("Colision Stay 2d");
+	}
+
 }

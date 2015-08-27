@@ -16,6 +16,7 @@ public class Jogador : MonoBehaviour {
 	public 	LayerMask	WhatIsGround;
 	public  int			jumped = 0;
 	public 	bool		doubleJump;
+	public  bool		wallcheck;
 
 	// Use this for initialization
 	void Start () {
@@ -70,27 +71,28 @@ public class Jogador : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter2D()	{
-		Debug.Log ("bateu");
+	void OnTriggerEnter2D(Collider2D collid)	{
+//		wallcheck = true;
 	}
 
-	void OnTriggerExit2D(){
-		Debug.Log ("SAIU");
+	void OnTriggerExit2D(Collider2D collid){
+		wallcheck = false;
 	}
 
-	void OnTriggerStay2D(){
-		Debug.Log ("EM COLISÃO");
+	void OnTriggerStay2D(Collider2D collid){
+		wallcheck = true;
 	}
 
-	void OnColisionEnter2D(){
-		Debug.Log ("Colision Enter 2d");
+	void OnCollisionEnter2D(Collision2D  coll){
+		if (coll.gameObject.tag == "bloco")
+			Debug.Log ("Bateu em um bloco");
 	}
 
-	void OnColisionExit2D(){
+	void OnCollisionExit2D(Collision2D  coll){
 		Debug.Log ("Colision Exit 2d");
 	}
 
-	void OnColisionStay2D(){
+	void OnCollisionStay2D(Collision2D  coll){
 		Debug.Log ("Colision Stay 2d");
 	}
 
